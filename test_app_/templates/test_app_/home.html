@@ -1,0 +1,12 @@
+{% extends "test_app_/base.html" %}
+{% block content %}
+        <h1>Test App Home</h1>
+        
+        {% for thing in things %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <small class="mr-2" href="#"> {{ thing.name }} who is a {{ thing.position }} plays for {{ thing.country }} </small>
+                </div>
+            </article>
+        {% endfor %}
+{% endblock content %}
