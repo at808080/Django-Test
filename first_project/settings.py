@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Add new applications here so that Django knows to look for them when loading website pages
 INSTALLED_APPS = [
     "test_app_.apps.TestAppConfig",
+    "users.apps.UsersConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +125,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "test_app_-home"
+
+LOGIN_URL = "login"
