@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -20,4 +20,20 @@ def Register(request):
 
 @login_required #decorator to ensure that redirected to profile only if already logged in
 def Profile(request):
-    return render(request, "users/profile.html")
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        prof_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and prof_form.is_valid():
+            user_form.save()
+            prof_form.save()
+            messages.success(request, f'Profile updated successfully')
+            return redirect("profile") 
+    
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        prof_form = ProfileUpdateForm(instance=request.user.profile)
+    context = {
+        "user_form": user_form,
+        "prof_form": prof_form
+    }
+    return render(request, "users/profile.html", context)

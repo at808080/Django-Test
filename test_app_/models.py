@@ -14,3 +14,6 @@ class Post(models.Model):
     author = models.ForeignKey(Player, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     content = models.TextField()
+
+#class Profile(models.Model):
+
